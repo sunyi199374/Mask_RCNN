@@ -74,7 +74,7 @@ def apply_mask(image, mask, color, alpha=0.5):
 
 
 def display_instances(image, boxes, masks, class_ids, class_names,
-                      scores=None, title="",
+                      scores=None, frameno = 1, title="",
                       figsize=(16, 16), ax=None):
     """
     boxes: [num_instance, (y1, x1, y2, x2, class_id)] in image coordinates.
@@ -90,6 +90,8 @@ def display_instances(image, boxes, masks, class_ids, class_names,
         print("\n*** No instances to display *** \n")
     else:
         assert boxes.shape[0] == masks.shape[-1] == class_ids.shape[0]
+
+
 
     if not ax:
         _, ax = plt.subplots(1, figsize=figsize)
@@ -142,9 +144,10 @@ def display_instances(image, boxes, masks, class_ids, class_names,
             verts = np.fliplr(verts) - 1
             p = Polygon(verts, facecolor="none", edgecolor=color)
             ax.add_patch(p)
-    ax.imshow(masked_image.astype(np.uint8))
-    plt.show()
-    
+
+        ax.imshow(masked_image.astype(np.uint8))
+        plt.savefig(frameno+'.jpg') 
+        return masked_image.astype(np.uint8)
 
 def draw_rois(image, rois, refined_rois, mask, class_ids, class_names, limit=10):
     """
