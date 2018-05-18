@@ -1,7 +1,6 @@
 # Changes To it
-- add plot output
-- reading video and output picture frames
-- (working) add a vedio transform function
+- Reading video and output detection frames 
+- Fix the issue that Kernel died when running with GPU
 
 # Mask R-CNN for Object Detection and Segmentation
 
